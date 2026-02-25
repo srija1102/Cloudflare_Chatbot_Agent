@@ -1,0 +1,56 @@
+/**
+ * For more details on how to configure Wrangler, refer to:
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "my-agent",
+	"main": "src/server.ts",
+	"compatibility_date": "2026-01-28",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"ai": {
+		"binding": "AI",
+		"remote": true
+	},
+	"assets": {
+		"not_found_handling": "single-page-application",
+		"run_worker_first": [
+			"/agents/*"
+		]
+	},
+	"durable_objects": {
+		"bindings": [
+			{
+				"class_name": "CodeReviewAgent",
+				"name": "CodeReviewAgent"
+			}
+		]
+	},
+	"migrations": [
+		{
+			"new_sqlite_classes": [
+				"ChatAgent"
+			],
+			"tag": "v1"
+		},
+		{
+			"renamed_classes": [
+				{ "from": "ChatAgent", "to": "CodeReviewAgent" }
+			],
+			"tag": "v2"
+		}
+	],
+	"observability": {
+		"enabled": true
+	},
+	"vars": {
+		"CF_ACCOUNT_ID": "e5bcf0e84e2def1385a56e84780573fc"
+	}
+	/**
+	 * Service Bindings (communicate between multiple Workers)
+	 * https://developers.cloudflare.com/workers/wrangler/configuration/#service-bindings
+	 */
+	// "services": [  {   "binding": "MY_SERVICE",   "service": "my-service"  } ]
+}
