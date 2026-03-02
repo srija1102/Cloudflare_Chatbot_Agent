@@ -98,7 +98,7 @@ Each chat session maps to its own Durable Object instance identified by a UUID. 
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/your-username/my-agent.git
+git clone https://github.com/your-username/Cloudflare_Chatbot_Agent.git
 cd my-agent
 
 # 2. Install dependencies
